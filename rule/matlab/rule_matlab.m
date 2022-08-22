@@ -9,9 +9,9 @@ k=1:length(sch_cycle(:,1))-1;
 
 acc=[0;(ve(k+1)-ve(k))./(t(k+1)-t(k))];%m/s/s 加速度
 %% 车体参数
-veh_gravity=9.81;    % m/s^2重力加速度
+g=9.81;    % m/s^2重力加速度
 veh_air_density=1.2258; % kg/m^3
-veh_CD=0.55; 
+Cd=0.55; 
 veh_FA=1.9;% (m^2) (ref. WVU test data)
 
 veh_mass=1500;
@@ -19,12 +19,12 @@ delta_avg=1.1;
 %% 车轮及滚阻
 wh_radius=0.301;    % (m) 
 
-wh_1st_rrc=0.0065;
+f=0.0065;
 eff_fd=0.95;
 %% 整车模型
-Fr=veh_mass*veh_gravity*wh_1st_rrc;     % 滚动阻力 N
-Fi=veh_mass*veh_gravity.*0;  % 坡道阻力 N
-Fa=0.5*veh_air_density*veh_FA*veh_CD*(ve.^2);     % 空气阻力 N
+Fr=veh_mass*g*f;     % 滚动阻力 N
+Fi=veh_mass*g.*0;  % 坡道阻力 N
+Fa=0.5*veh_air_density*veh_FA*Cd*(ve.^2);     % 空气阻力 N
 Fj=veh_mass.*delta_avg.*acc;   %加速阻力  N
 
 Ft=Fr+Fi+Fa+Fj;% 车轮处驱动力需求，N
